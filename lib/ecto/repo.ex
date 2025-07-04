@@ -1465,7 +1465,8 @@ defmodule Ecto.Repo do
       stream = MyRepo.stream(query)
 
       MyRepo.transact(fn ->
-        Enum.to_list(stream)
+        count = Enum.to_list(stream) |> Enum.count()
+        {:ok, count}
       end)
   """
   @doc group: "Query API"
